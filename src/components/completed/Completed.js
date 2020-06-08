@@ -5,10 +5,10 @@ import { toggleTodo, deleteTodo } from '../../Actions';
 
 class Completed extends Component {
 
-    Completed = () => {
+    completed = () => {
         let completedTodos = [];
         this.props.todos.map((todo) => {
-          if (!todo.completed) {
+          if (todo.completed) {
             completedTodos.push(todo)
           }          
         })

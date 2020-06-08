@@ -4,7 +4,7 @@ import { toggleTodo, deleteTodo } from '../../Actions';
  
 
 class Active extends Component {
-    Active = () => {
+    active = () => {
         let activeTodos = [];
         this.props.todos.map((todo) => {
           if (!todo.completed) {

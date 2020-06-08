@@ -26,15 +26,13 @@ class App extends Component {
             <div className = "header">   
               <ActiveHeader />
             </div>
-            <Active />} 
-            />
+            <Active />
           </Route>  
           <Route path = "/completed">
             <div className = "header">   
               <CompletedHeader />
             </div>
-            <Completed />}
-            />
+            <Completed />            
           </Route> 
         </Switch>         
         <Footer />
