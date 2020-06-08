@@ -6,8 +6,7 @@ class Completed extends Component {
     filterTodos = () => {
         const completedTodos = this.props.todos.filter(todo => todo.completed)
         return completedTodos;
-    }
-    
+    }   
 
     render () {
         return (
@@ -46,7 +45,7 @@ const mapStateToProps = (state) => {
   const mapDispatchToProps = {
    toggleTodo,
    deleteTodo
-  }
+}
   
    
 export default connect(mapStateToProps, mapDispatchToProps)(Completed);
