@@ -1,7 +1,6 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { toggleTodo, deleteTodo } from '../../Actions';
-
 
 class TodoList extends Component {
   render() {
@@ -13,7 +12,7 @@ class TodoList extends Component {
               <li key = {todo.id} className = {todo.completed ? "completed" : ""}>
                 <div className = "view">
                   <input 
-                    onChange = {(event) => this.props.toggleTodo(todo.id)} 
+                    onChange = {() => this.props.toggleTodo(todo.id)} 
                     className = "toggle" type = "checkbox" 
                     checked = {todo.completed}                    
                   />
@@ -39,7 +38,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = {
  toggleTodo,
  deleteTodo
-
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(TodoList);

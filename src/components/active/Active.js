@@ -1,55 +1,45 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { toggleTodo, deleteTodo } from '../../Actions';
- 
 
 class Active extends Component {
-    render () {
-        return (
-            <section className = "main">
-                <ul className = "todo-list">
-                    {this.props.todos.map((todo) => {
-                        if (!todo.completed) {
-                            return (
-                                <li key = {todo.id} className = {todo.completed ? "completed" : ""}>
-                                    <div className = "view">
-                                        <input 
-                                            onClick = {this.props.toggleTodo} 
-                                            className = "toggle" type = "checkbox" 
-                                            checked = {todo.completed} 
-                                        />
-                                        <label>{todo.title}</label>
-                                        <button 
-                                            onClick = {this.props.deleteTodo} 
-                                            className = "destroy">            
-                                        </button>
-                                    </div>
-                                </li>
-                            )    
-                        }                                                
-                    })}
-                </ul>
-            </section>
-        ) 
-    }       
+  render() {
+    return (
+        <section className = "main">
+            <ul className = "todo-list">
+                {this.props.todos.map((todo) => {
+                    if (!todo.completed) {
+                        return (
+                            <li key = {todo.id} className = {todo.completed ? "completed" : ""}>
+                                <div className = "view">
+                                    <input 
+                                        onChange = {() => this.props.toggleTodo(todo.id)} 
+                                        className = "toggle" type = "checkbox" 
+                                        checked = {todo.completed}                    
+                                    />
+                                    <label>{todo.title}</label>
+                                    <button 
+                                        onClick = {() => this.props.deleteTodo(todo.id)} 
+                                        className = "destroy">            
+                                    </button>
+                                </div>
+                            </li>
+                        )
+                    }
+                })}           
+            </ul>
+        </section>
+    );
+  }
 }
-     
-   
 
+const mapStateToProps = (state) => {
+  return {todos: state}  
+} 
 
-const mapStateToProps = state => ({    
-    todos: state
-})
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-        toggleTodo: (id) => {
-            dispatch(toggleTodo(id))
-        },
-        deleteTodo: (id) => {
-            dispatch(deleteTodo(id))
-        }
-    }
+const mapDispatchToProps = {
+ toggleTodo,
+ deleteTodo
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Active);

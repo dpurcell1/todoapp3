@@ -3,9 +3,11 @@ import { addTodo } from '../../Actions';
 import { connect } from 'react-redux';
 
 class CompletedHeader extends Component {
+    
     handleCreate = (event) => {
-        if (event.key === "Enter") { 
+        if (event.key === "Enter" && event.target.value !== "") {            
             this.props.addTodo(event.target.value)
+            event.target.value = "";
         }           
       }
 
@@ -26,12 +28,8 @@ class CompletedHeader extends Component {
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        addTodo: (input) => {
-            dispatch(addTodo(input))
-        }
-    }   
+const mapDispatchToProps = {
+    addTodo
 }
 
-export default connect(null, mapDispatchToProps)(CompletedHeader)
+  export default connect(null, mapDispatchToProps)(CompletedHeader)
