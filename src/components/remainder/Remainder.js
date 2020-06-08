@@ -8,9 +8,9 @@ class Remainder extends Component {
     this.props.todos.map((todo) => {
       if (!todo.completed) {
         remainder += 1;
-      }     
+      }        
     })
-    return remainder;    
+     return remainder;    
   }
 
   render() {

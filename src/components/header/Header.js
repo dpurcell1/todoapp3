@@ -5,8 +5,7 @@ import { connect } from 'react-redux';
 class Header extends Component {
     
     handleCreate = (event) => {
-        if (event.key === "Enter") {
-            console.log(event.target.value) 
+        if (event.key === "Enter") {            
             this.props.addTodo(event.target.value)
         }           
       }
@@ -27,10 +26,11 @@ class Header extends Component {
         )
     }
 }
+
 const mapDispatchToProps = (dispatch) => {
     return {
-      addTodo: (message) => {
-        dispatch(addTodo(message))
+      addTodo: () => {
+        dispatch(addTodo())
       }
     }
 };

@@ -13,16 +13,19 @@ const todoReducer = (state = initialState, action) => {
           completed: action.completed        
         }]
       case TOGGLE_TODO:
-        return state.map(todo =>
-          todo.id === action.id ? {...todo, completed: !todo.completed } : todo                             
-        )
+       state.map((todo) => {
+         if (todo.id === action.id)
+         return {
+          ...state, completed: !todo.completed
+         }
+       })
       case DELETE_TODO:
         let newTodos = []
          state.map(todo => {
           if (todo.id !== action.id) {
             newTodos.push(todo)
           }
-          return newTodos          
+          return newTodos;             
         })
         break;
       case CLEAR_COMPLETED_TODOS:

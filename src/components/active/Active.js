@@ -4,49 +4,41 @@ import { toggleTodo, deleteTodo } from '../../Actions';
  
 
 class Active extends Component {
-    active = () => {
-        let activeTodos = [];
-        this.props.todos.map((todo) => {
-          if (!todo.completed) {
-            activeTodos.push(todo)
-          }          
-        })
+    render () {
         return (
             <section className = "main">
                 <ul className = "todo-list">
-                    {activeTodos.map((todo) => (
-                        <li key = {todo.id} className = {todo.completed ? "completed" : ""}>
-                            <div className = "view">
-                                <input 
-                                    onClick = {this.props.toggleTodo} 
-                                    className = "toggle" type = "checkbox" 
-                                    checked = {todo.completed} 
-                                />
-                                <label>{todo.title}</label>
-                                <button 
-                                    onClick = {this.props.deleteTodo} 
-                                    className = "destroy">            
-                                </button>
-                            </div>
-                        </li>
-                    ))}
+                    {this.props.todos.map((todo) => {
+                        if (!todo.completed) {
+                            return (
+                                <li key = {todo.id} className = {todo.completed ? "completed" : ""}>
+                                    <div className = "view">
+                                        <input 
+                                            onClick = {this.props.toggleTodo} 
+                                            className = "toggle" type = "checkbox" 
+                                            checked = {todo.completed} 
+                                        />
+                                        <label>{todo.title}</label>
+                                        <button 
+                                            onClick = {this.props.deleteTodo} 
+                                            className = "destroy">            
+                                        </button>
+                                    </div>
+                                </li>
+                            )    
+                        }                                                
+                    })}
                 </ul>
-            </section>    
-        )
-    }
-        
-    render () {
-        return (
-            this.active()
-        )  
-    } 
+            </section>
+        ) 
+    }       
 }
-        
+     
+   
 
 
-const mapStateToProps = state => ({
+const mapStateToProps = state => ({    
     todos: state
-    
 })
 
 const mapDispatchToProps = (dispatch) => {
