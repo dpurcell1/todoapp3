@@ -13,13 +13,13 @@ class TodoList extends Component {
               <li key = {todo.id} className = {todo.completed ? "completed" : ""}>
                 <div className = "view">
                   <input 
-                    onClick = {this.props.toggleTodo} 
+                    onChange = {(event) => this.props.toggleTodo(todo.id)} 
                     className = "toggle" type = "checkbox" 
-                    checked = {todo.completed} 
+                    checked = {todo.completed}                    
                   />
                   <label>{todo.title}</label>
                   <button 
-                    onClick = {this.props.deleteTodo} 
+                    onClick = {() => this.props.deleteTodo(todo.id)} 
                     className = "destroy">            
                   </button>
                 </div>
@@ -36,15 +36,10 @@ const mapStateToProps = (state) => {
   return {todos: state}  
 } 
 
-const mapDispatchToProps = dispatch => {
-  return {
-    toggleTodo: (id) => {
-      dispatch(toggleTodo(id))
-    },
-    deleteTodo: (id) => {
-      dispatch(deleteTodo(id))
-    }
-  }
+const mapDispatchToProps = {
+ toggleTodo,
+ deleteTodo
+
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(TodoList);

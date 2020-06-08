@@ -5,23 +5,26 @@ export const DELETE_TODO = 'DESTROY_TODO'
 export const CLEAR_COMPLETED_TODOS = 'CLEAR_COMPLETED_TODOS' 
 
 export const addTodo = input => {
-    return {
-        type: ADD_TODO,
+    let newTodo = {
         userId: 1,
         id: uuidv4(),
         title: input,
         completed: false
+    }
+    return {
+        type: ADD_TODO,
+        payload: newTodo        
     }     
 }
 
 export const toggleTodo = id => ({  
     type: TOGGLE_TODO,
-    id  
+    payload: id  
 }) 
 
 export const deleteTodo = id => ({ 
     type: DELETE_TODO,
-    id  
+    payload: id  
 })
 
 export const clearCompletedTodos = () => ({  

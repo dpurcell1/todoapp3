@@ -6,28 +6,16 @@ const initialState = todosList;
 const todoReducer = (state = initialState, action) => {
     switch (action.type) {
       case ADD_TODO: 
-        return [...state, {
-          userId: action.userId,
-          id: action.id,
-          title: action.input,
-          completed: action.completed        
-        }]
-      case TOGGLE_TODO:
-       state.map((todo) => {
-         if (todo.id === action.id)
-         return {
-          ...state, completed: !todo.completed
-         }
-       })
-      case DELETE_TODO:
-        let newTodos = []
-         state.map(todo => {
-          if (todo.id !== action.id) {
-            newTodos.push(todo)
+        return [...state, action.payload]
+      case TOGGLE_TODO:       
+         return [...state.map((todo) => {
+          if (todo.id === action.payload) {
+            todo.completed = !todo.completed
           }
-          return newTodos;             
-        })
-        break;
+          return todo
+        })]
+      case DELETE_TODO:            
+       return [...state.filter(todo => todo.id !== action.payload)] 
       case CLEAR_COMPLETED_TODOS:
         return [...state.filter(todo => !todo.completed)]    
       default:

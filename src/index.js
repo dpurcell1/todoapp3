@@ -7,6 +7,7 @@ import './index.css';
 import todoReducer from './Reducer'
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import { composeWithDevTools } from 'redux-devtools-extension'
 
 const store = createStore(todoReducer)
 
