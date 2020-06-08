@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import {NavLink} from "react-router-dom";
+import { clearCompletedTodos } from '../../Actions';
+import { connect } from 'react-redux';
+import Remainder from '../../components/remainder/Remainder'
 
 class Footer extends Component {
-    render() {
-        return (
-            <footer className="footer">
-              {/* <!-- This should be `0 items left` by default --> */}
-              <span className="todo-count">
-                <strong>{this.props.remainder()}</strong> item(s) left
-              </span>
+  render() {
+    return (
+      <footer className="footer">      
+        <span className="todo-count">
+          <Remainder /> item(s) left
+            </span>
               <ul className="filters">
                 <li>
                   <NavLink exact activeClassName = "selected" to="/">All</NavLink>
@@ -21,12 +23,21 @@ class Footer extends Component {
                 </li>
               </ul>
               <button 
-                onClick = {this.props.clearCompleted} 
+                onClick = {this.props.clearCompletedTodos} 
                 className="clear-completed">Clear completed
               </button>
-            </footer>
-        )
-    }
+      </footer>
+    )
+  }
 }
 
-export default Footer;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    clearCompletedTodos: (todo) => {
+      dispatch(clearCompletedTodos(todo))
+    }
+  }
+};
+
+export default connect(null, mapDispatchToProps)(Footer)
+

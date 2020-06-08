@@ -1,20 +1,37 @@
 import React, { Component } from 'react';
+import { addTodo } from '../../Actions';
+import { connect } from 'react-redux';
 
-class Header extends Component {
+class CompletedHeader extends Component {
+    handleCreate = (event) => {
+        if (event.key === "Enter") { 
+            this.props.addTodo(event.target.value)
+        }           
+      }
+
     render () {
         return (
             <div>
                 <header className = "header">
                 <h1>completed</h1>
                 <input 
-                    onKeyPress = {this.props.addTodo} 
+                    onKeyPress = {this.handleCreate} 
                     className = "new-todo" 
-                    placeholder = "What needs to be done?" 
+                    placeholder = "What needs to be done?"
                     autoFocus 
                 />
                 </header>
             </div>
         )
     }
-}     
-export default Header;
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addTodo: (input) => {
+            dispatch(addTodo(input))
+        }
+    }   
+}
+
+export default connect(null, mapDispatchToProps)(CompletedHeader)
