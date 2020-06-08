@@ -3,29 +3,31 @@ import { connect } from 'react-redux';
 import { toggleTodo, deleteTodo } from '../../Actions';
 
 class Active extends Component {
+    filterTodos = () => {
+        const activeTodos = this.props.todos.filter(todo => !todo.completed)
+        return activeTodos;
+    }
   render() {
     return (
         <section className = "main">
             <ul className = "todo-list">
-                {this.props.todos.map((todo) => {
-                    if (!todo.completed) {
-                        return (
-                            <li key = {todo.id} className = {todo.completed ? "completed" : ""}>
-                                <div className = "view">
-                                    <input 
-                                        onChange = {() => this.props.toggleTodo(todo.id)} 
-                                        className = "toggle" type = "checkbox" 
-                                        checked = {todo.completed}                    
-                                    />
-                                    <label>{todo.title}</label>
-                                    <button 
-                                        onClick = {() => this.props.deleteTodo(todo.id)} 
-                                        className = "destroy">            
-                                    </button>
-                                </div>
-                            </li>
-                        )
-                    }
+                {this.filterTodos().map((todo) => {                    
+                    return (
+                        <li key = {todo.id} className = {todo.completed ? "completed" : ""}>
+                            <div className = "view">
+                                <input 
+                                    onChange = {() => this.props.toggleTodo(todo.id)} 
+                                    className = "toggle" type = "checkbox" 
+                                    checked = {todo.completed}                    
+                                />
+                                <label>{todo.title}</label>
+                                <button 
+                                    onClick = {() => this.props.deleteTodo(todo.id)} 
+                                    className = "destroy">            
+                                </button>
+                            </div>
+                        </li>
+                    )                    
                 })}           
             </ul>
         </section>
